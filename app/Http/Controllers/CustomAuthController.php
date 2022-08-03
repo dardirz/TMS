@@ -87,4 +87,7 @@ class CustomAuthController extends Controller
         $user = User::all();
         return view('admin.users',['user'=>$user]);
     }
+
+
+
 }
