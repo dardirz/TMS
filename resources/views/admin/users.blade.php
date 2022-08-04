@@ -21,42 +21,68 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="card-content collapse show">
-                                    <div class="card-body card-dashboard">
-                                        <a href="{{ route('register-user') }}" class="btn btn-primary btn-min-width box-shadow-1 mr-1 mb-1"> ADD NEW USER</a>
-                                        <table class="table table-striped table-bordered zero-configuration">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                      <!-- Task List table -->
+                                      <div class="table-responsive">
+
+                                        <a href="{{ route('register-user') }}" > <button class="btn btn-primary btn-sm"><i class="ft-plus white"></i>  ADD NEW USER</button></a>
+
+                                            <table id="users-contacts" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
                                             <thead>
                                                 <tr>
+                                                    <th></th>
                                                     <th>Name</th>
                                                     <th>Email</th>
                                                     <th>Phone</th>
-                                                    <th>Edit</th>
-                                                    <th>Delete</th>
+                                                    <th>Action</th>
+
 
                                                 </tr>
                                             </thead>
                                             @foreach ($user as $user)
                                                 <tbody>
                                                     <tr>
-                                                        <td>{{ $user->name }}</td>
-                                                        <td>{{ $user->email }}</td>
-                                                        <td>{{ $user->phone }}</td>
-                                                        <td><a href="{{ route('user-edit', $user->id) }}" class="btn btn-primary btn-min-width box-shadow-1 mr-1 mb-1">edit</a></td>
                                                         <td>
-                                                            <form role="form" action="{{route('user-delete',$user->id)}}" method="post">
-                                                                @csrf
-                                                                @method('DELETE')
-
-                                                                  <button type="submit"class="btn btn-danger btn-min-width box-shadow-1 mr-1 mb-1">DELETE</button>
-                                                                
-                                                            </form>
+                                                            <input type="checkbox" class="input-chk">
                                                         </td>
+                                                        <td>{{ $user->name }}</td>
+                                                        <td class="text-center">{{ $user->email }}</td>
+                                                        <td>{{ $user->phone }}</td>
+                                                        <td>
+                                                            <span class="dropdown">
+                                                                <button id="btnSearchDrop2" type="button"
+                                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="true"
+                                                                    class="btn btn-primary dropdown-toggle dropdown-menu-right"><i
+                                                                        class="ft-settings"></i></button>
+                                                                <span aria-labelledby="btnSearchDrop2"
+                                                                    class="dropdown-menu mt-1 dropdown-menu-right">
+                                                                    <a href="{{ route('user-edit', $user->id) }}"
+                                                                        class="dropdown-item"><i class="ft-edit-2"></i>
+                                                                        Edit</a>
+                                                                    <form role="form"
+                                                                        action="{{ route('user-delete', $user->id) }}"
+                                                                        method="post">
+                                                                        @csrf
+                                                                        @method('DELETE')
+
+                                                                        <button type="submit" class="dropdown-item"><i
+                                                                                class="ft-trash-2"></i>DELETE</button>
+
+                                                                    </form>
+                                                                </span>
+                                                            </span>
+                                                        </td>
+
+
 
                                                     </tr>
                                                 </tbody>
                                             @endforeach
                                             </tfoot>
                                         </table>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
