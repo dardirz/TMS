@@ -19,3 +19,7 @@ Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout')
 Route::get('/', [CustomAuthController::class, 'home']);
 
 Route::get('/admin/users', [CustomAuthController::class, 'showUsers'])->name('user-show');
+
+Route::get('admin/edit/{id}', [CustomAuthController::class, 'edit'])->name('user-edit');
+Route::put('/update/{id}', [CustomAuthController::class, 'update'])->name('user-update');
+Route::delete('/admin/delete/{id}',[CustomAuthController::class,'destroy'])->name('user-delete');

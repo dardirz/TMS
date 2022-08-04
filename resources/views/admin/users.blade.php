@@ -41,8 +41,17 @@
                                                         <td>{{ $user->name }}</td>
                                                         <td>{{ $user->email }}</td>
                                                         <td>{{ $user->phone }}</td>
-                                                        <td><a href="" class="btn btn-primary btn-min-width box-shadow-1 mr-1 mb-1">edit</a></td>
-                                                        <td><a href="" class="btn btn-danger btn-min-width box-shadow-1 mr-1 mb-1">delete</a></td>
+                                                        <td><a href="{{ route('user-edit', $user->id) }}" class="btn btn-primary btn-min-width box-shadow-1 mr-1 mb-1">edit</a></td>
+                                                        <td>
+                                                            <form role="form" action="{{route('user-delete',$user->id)}}" method="post">
+                                                                @csrf
+                                                                @method('DELETE')
+
+                                                                  <button type="submit"class="btn btn-danger btn-min-width box-shadow-1 mr-1 mb-1">DELETE</button>
+                                                                
+                                                            </form>
+                                                        </td>
+
                                                     </tr>
                                                 </tbody>
                                             @endforeach

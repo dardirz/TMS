@@ -88,6 +88,39 @@ class CustomAuthController extends Controller
         return view('admin.users',['user'=>$user]);
     }
 
+    public function edit($id){
+        $user = User::findOrFail($id);
+        return view('admin.edit',['user'=>$user]);
+    }
+
+    public function update(Request $request,$id){
+
+        $validator=$request->validate([
+            'phone' => 'required',
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+
+        if($validator){
+
+            $user = User::findOrFail($id);
+            $user->update($request->all());
+            return redirect(route('user-show'))->with('sucess','updated');
+        }else{
+            return back()->with('fail','some error');
+        }
+
+
+    }
+
+    public function destroy( $id)
+    {
+        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect(route('user-show'))->with('sucess', 'User is Deleted Successful!');
+    }
+
 
 
 }
