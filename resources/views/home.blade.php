@@ -23,7 +23,7 @@
                   <div class="row mb-1">
                     <div class="col-6 col-md-4">
                       <h5>Current week</h5>
-                      <h1>{{Auth::user()->name}}</h1>
+                     
                       <h2 class="danger">$82,124</h2>
                     </div>
                     <div class="col-6 col-md-4">

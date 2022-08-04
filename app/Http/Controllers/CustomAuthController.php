@@ -30,9 +30,9 @@ class CustomAuthController extends Controller
 
     public function registration()
     {
-        if(Auth::check()){
+
         return view('auth.registration');
-        }
+
     }
 
     public function customRegistration(Request $request)
@@ -62,17 +62,17 @@ class CustomAuthController extends Controller
 
     public function dashboard()
     {
-        if(Auth::check()){
+
             return view('dashboard');
-        }
+
 
         return redirect("login")->withSuccess('You are not allowed to access');
     }
 
     public function home(){
-        if(Auth::check()){
+
             return view('home');
-        }
+        
         return redirect("login")->withSuccess('You are not allowed to access');
     }
 
