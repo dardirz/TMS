@@ -9,11 +9,11 @@
             </li>
             <li><a class="menu-item" href="{{route('user-show')}}" data-i18n="nav.dash.crypto">User management</a>
             </li>
-            <li><a class="menu-item" href="dashboard-sales.html" data-i18n="nav.dash.sales">Trip Management</a>
+            <li><a class="menu-item" href="{{route('trip.index')}}" data-i18n="nav.dash.sales">Trip Management</a>
             </li>
-            <li><a class="menu-item" href="dashboard-sales.html" data-i18n="nav.dash.sales">Point Management</a>
+            <li><a class="menu-item" href="{{route('point.index')}}" data-i18n="nav.dash.sales">Point Management</a>
             </li>
-            <li><a class="menu-item" href="dashboard-sales.html" data-i18n="nav.dash.sales">Activity Management</a>
+            <li><a class="menu-item" href="{{route('activity.index')}}" data-i18n="nav.dash.sales">Activity Management</a>
             </li>
           </ul>
         </li>
