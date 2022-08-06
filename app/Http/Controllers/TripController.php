@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Trip;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TripController extends Controller
@@ -25,7 +26,8 @@ class TripController extends Controller
      */
     public function create()
     {
-        return view('trip.create');
+        $users = User::all();
+        return view('trip.create',compact('users'));
     }
 
     /**

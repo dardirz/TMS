@@ -15,6 +15,7 @@ class Trip extends Model
 
     protected $fillable = [
         'time',
+        'user_id',
 
     ];
 
