@@ -5,8 +5,7 @@
       <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
         <li class=" nav-item"><a href="#"><i class="la la-home"></i><span class="menu-title" data-i18n="nav.dash.main">Dashboard</span><span class="badge badge badge-info badge-pill float-right mr-2">3</span></a>
           <ul class="menu-content">
-            <li><a class="menu-item" href="{{ route('register-user') }}" data-i18n="nav.dash.ecommerce">Add New User</a>
-            </li>
+
             <li><a class="menu-item" href="{{route('user-show')}}" data-i18n="nav.dash.crypto">User management</a>
             </li>
             <li><a class="menu-item" href="{{route('trip.index')}}" data-i18n="nav.dash.sales">Trip Management</a>

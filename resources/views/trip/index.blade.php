@@ -46,7 +46,7 @@
                                                         <td>
                                                             <input type="checkbox" class="input-chk">
                                                         </td>
-                                                        <td>{{ $user->name }}</td>
+                                                        <td>{{ $user->user->name }}</td>
                                                         <td class="text-center">{{ $user->time }}</td>
 
                                                         <td>

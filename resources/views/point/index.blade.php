@@ -57,7 +57,7 @@
                                                         <td>{{ $user->address }}</td>
                                                         <td>{{ $user->latitude }}</td>
                                                         <td>{{ $user->longitude }}</td>
-                                                        <td>{{ $user->activity }}</td>
+                                                        <td>{{ $user->activity_id }}</td>
 
                                                         <td>
                                                             <span class="dropdown">

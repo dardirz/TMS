@@ -15,7 +15,7 @@ class PointController extends Controller
     public function index()
     {
         $point = Point::all();
-        return view('point.index', compact('point'))->with('activity');
+        return view('point.index', compact('point'))->with('activities');
     }
 
     /**
