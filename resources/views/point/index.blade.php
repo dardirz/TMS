@@ -27,7 +27,7 @@
                                       <!-- Task List table -->
                                       <div class="table-responsive">
 
-                                        <a href="{{ route('trip.create') }}" > <button class="btn btn-primary btn-sm"><i class="ft-plus white"></i>  ADD NEW POINT</button></a>
+                                        <a href="{{ route('point.create') }}" > <button class="btn btn-primary btn-sm"><i class="ft-plus white"></i>  ADD NEW POINT</button></a>
 
                                             <table id="users-contacts" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
                                             <thead>

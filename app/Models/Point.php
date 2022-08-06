@@ -14,6 +14,9 @@ class Point extends Model
         'type',
         'location',
         'address',
+        'latitude',
+        'longitude',
+        'activity_id'
 
     ];
 

@@ -17,8 +17,8 @@ class CreateTripsTable extends Migration
             $table->id();
             $table->timestamp("time");
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

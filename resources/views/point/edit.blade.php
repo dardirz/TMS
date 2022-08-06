@@ -33,7 +33,7 @@
                                                 <div class="form-group">
                                                     <label for="name">Name</label>
                                                     <input type="text" id="name" class="form-control border-primary"
-                                                        placeholder="Name" name="name" value="{{$trip->name}}">
+                                                        placeholder="Name" name="name" value="{{$point->name}}">
                                                     @if ($errors->has('name'))
                                                         <span class="text-danger">{{ $errors->first('name') }}</span>
                                                     @endif
@@ -43,7 +43,7 @@
                                                 <div class="form-group">
                                                     <label for="type">type</label>
                                                     <input type="text" id="type" class="form-control border-primary"
-                                                        placeholder="type" name="type" value="{{$trip->type}}">
+                                                        placeholder="type" name="type" value="{{$point->type}}">
                                                     @if ($errors->has('type'))
                                                         <span class="text-danger">{{ $errors->first('type') }}</span>
                                                     @endif
@@ -53,7 +53,7 @@
                                                 <div class="form-group">
                                                     <label for="location">location</label>
                                                     <input type="text" id="location" class="form-control border-primary"
-                                                        placeholder="location" name="location" value="{{$trip->location}}">
+                                                        placeholder="location" name="location" value="{{$point->location}}">
                                                     @if ($errors->has('location'))
                                                         <span class="text-danger">{{ $errors->first('location') }}</span>
                                                     @endif
@@ -63,7 +63,7 @@
                                                 <div class="form-group">
                                                     <label for="address">address</label>
                                                     <input type="text" id="address" class="form-control border-primary"
-                                                        placeholder="address" name="address" value="{{$trip->address}}">
+                                                        placeholder="address" name="address" value="{{$point->address}}">
                                                     @if ($errors->has('address'))
                                                         <span class="text-danger">{{ $errors->first('address') }}</span>
                                                     @endif
@@ -73,7 +73,7 @@
                                                 <div class="form-group">
                                                     <label for="latitude">latitude</label>
                                                     <input type="text" id="latitude" class="form-control border-primary"
-                                                        placeholder="latitude" name="latitude" value="{{$trip->latitude}}">
+                                                        placeholder="latitude" name="latitude" value="{{$point->latitude}}">
                                                     @if ($errors->has('latitude'))
                                                         <span class="text-danger">{{ $errors->first('latitude') }}</span>
                                                     @endif
@@ -83,7 +83,7 @@
                                                 <div class="form-group">
                                                     <label for="longitude">longitude</label>
                                                     <input type="text" id="longitude" class="form-control border-primary"
-                                                        placeholder="longitude" name="longitude" value="{{$trip->longitude}}">
+                                                        placeholder="longitude" name="longitude" value="{{$point->longitude}}">
                                                     @if ($errors->has('longitude'))
                                                         <span class="text-danger">{{ $errors->first('longitude') }}</span>
                                                     @endif
@@ -93,7 +93,7 @@
                                                 <div class="form-group">
                                                     <label for="activity">activity</label>
                                                     <input type="text" id="activity" class="form-control border-primary"
-                                                        placeholder="Name" name="activity" value="{{$trip->activity}}">
+                                                        placeholder="Name" name="activity" value="{{$point->activity}}">
                                                     @if ($errors->has('activity'))
                                                         <span class="text-danger">{{ $errors->first('activity') }}</span>
                                                     @endif

@@ -33,7 +33,7 @@
                                                 <div class="form-group">
                                                     <label for="name">Name</label>
                                                     <input type="text" id="name" class="form-control border-primary"
-                                                        placeholder="Name" name="name" value="{{$trip->name}}">
+                                                        placeholder="Name" name="name" value="{{$activity->name}}">
                                                     @if ($errors->has('name'))
                                                         <span class="text-danger">{{ $errors->first('name') }}</span>
                                                     @endif
