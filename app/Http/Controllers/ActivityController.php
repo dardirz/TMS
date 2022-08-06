@@ -14,7 +14,8 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        //
+        $activity = Activity::all();
+        return view('activity.index', compact('activity'));
     }
 
     /**
@@ -24,7 +25,7 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        //
+        return view('activity.create');
     }
 
     /**
@@ -35,7 +36,12 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+        ]);
+        $data = $request->all();
+        $show = Activity::create($data);
+        return redirect('admin/activity')->with('success', 'Activity Data is successfully Created');
     }
 
     /**
@@ -55,9 +61,10 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function edit(Activity $activity)
+    public function edit( $id)
     {
-        //
+        $activity = Activity::findOrFail($id);
+        return view('activity.edit', compact('activity'));
     }
 
     /**
@@ -67,9 +74,14 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Activity $activity)
+    public function update(Request $request,  $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+        ]);
+
+       Activity::whereId($id)->update($validatedData);
+       return redirect('admin/activity')->with('success', 'Activity Data is successfully updated');
     }
 
     /**
@@ -78,8 +90,10 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Activity $activity)
+    public function destroy( $id)
     {
-        //
+        $activity = Activity::findOrFail($id);
+        $activity->delete();
+        return redirect('admin/activity')->with('success', 'Activity Data is successfully Deleted');
     }
 }

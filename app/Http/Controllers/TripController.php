@@ -14,7 +14,8 @@ class TripController extends Controller
      */
     public function index()
     {
-        //
+        $trip = Trip::all();
+        return view('trip.index',compact('trip'));
     }
 
     /**
@@ -24,7 +25,7 @@ class TripController extends Controller
      */
     public function create()
     {
-        //
+        return view('trip.create');
     }
 
     /**
@@ -35,7 +36,12 @@ class TripController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'time' => 'required',
+        ]);
+        $data = $request->all();
+        $show = Trip::create($data);
+        return redirect('admin/trip')->with('success', 'trip Data is successfully Created');
     }
 
     /**
@@ -55,9 +61,10 @@ class TripController extends Controller
      * @param  \App\Models\Trip  $trip
      * @return \Illuminate\Http\Response
      */
-    public function edit(Trip $trip)
+    public function edit( $id)
     {
-        //
+        $trip = Trip::findOrFail($id);
+        return view('trip.edit',compact('trip'));
     }
 
     /**
@@ -67,9 +74,13 @@ class TripController extends Controller
      * @param  \App\Models\Trip  $trip
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Trip $trip)
+    public function update(Request $request,  $id)
     {
-        //
+        $validatedData = $request->validate([
+            'time' => 'required',
+        ]);
+        Trip::whereId($id)->update($validatedData);
+        return redirect('admin/trip')->with('success', 'Trip Data is successfully Updated ');
     }
 
     /**
@@ -78,8 +89,10 @@ class TripController extends Controller
      * @param  \App\Models\Trip  $trip
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Trip $trip)
+    public function destroy( $id)
     {
-        //
+        $point = Trip::findOrFail($id);
+        $point->delete();
+        return redirect('admin/trip')->with('success', 'trip Data is successfully Deleted');
     }
 }

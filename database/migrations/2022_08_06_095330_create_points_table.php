@@ -22,8 +22,8 @@ class CreatePointsTable extends Migration
             $table->decimal('latitude', 11, 8)->nullable();
             $table->decimal('longitude', 11, 8)->nullable();
             $table->unsignedBigInteger('activity_id')->nullable();
-            $table->foreign('activity_id')->references('id')->on('activities');
             $table->timestamps();
+            $table->foreign('activity_id')->references('id')->on('activities');
         });
     }
 

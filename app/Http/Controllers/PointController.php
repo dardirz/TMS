@@ -14,7 +14,8 @@ class PointController extends Controller
      */
     public function index()
     {
-        //
+        $point = Point::all();
+        return view('point.index', compact('point'));
     }
 
     /**
@@ -24,7 +25,7 @@ class PointController extends Controller
      */
     public function create()
     {
-        //
+        return view('point.create');
     }
 
     /**
@@ -35,7 +36,15 @@ class PointController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'type'=>'required',
+            'location'=>'required',
+            'address'=>'required',
+        ]);
+        $data = $request->all();
+        $show = Point::create($data);
+        return redirect('admin/point')->with('success', 'Point Data is successfully Created');
     }
 
     /**
@@ -55,9 +64,10 @@ class PointController extends Controller
      * @param  \App\Models\Point  $point
      * @return \Illuminate\Http\Response
      */
-    public function edit(Point $point)
+    public function edit( $id)
     {
-        //
+        $point = Point::findOrFail($id);
+        return view('point.edit', compact('point'));
     }
 
     /**
@@ -67,9 +77,16 @@ class PointController extends Controller
      * @param  \App\Models\Point  $point
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Point $point)
+    public function update(Request $request,  $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'type'=>'required',
+            'location'=>'required',
+            'address'=>'required',
+        ]);
+        Point::whereId($id)->update($validatedData);
+        return redirect('admin/point')->with('success', 'Point Data is successfully Updated ');
     }
 
     /**
@@ -78,8 +95,10 @@ class PointController extends Controller
      * @param  \App\Models\Point  $point
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Point $point)
+    public function destroy( $id)
     {
-        //
+        $point = Point::findOrFail($id);
+        $point->delete();
+        return redirect('admin/point')->with('success', 'Point Data is successfully Deleted');
     }
 }
