@@ -20,7 +20,17 @@ class Point extends Model
 
     ];
 
-    
+    public function activities(){
+        return $this->belongsToMany(
+            Activity::class,
+            'point_activity',
+            'point_id',
+            'activity_id',
+            'id',
+            'id'
+        );
+
+    }
 
 
 }

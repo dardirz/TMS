@@ -18,4 +18,16 @@ class Activity extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+    public function points(){
+        return $this->belongsToMany(
+            Point::class,
+            'point_activity',
+            'activity_id',
+            'point_id',
+            'id',
+            'id'
+        );
+
+    }
 }
