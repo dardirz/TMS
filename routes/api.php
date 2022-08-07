@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Resources\ActivityResource;
+use App\Models\Activity;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,6 @@ Route::group([
 });
 
 
+Route::get('/activities', function () {
+    return ActivityResource::collection(Activity::all());
+});
