@@ -7,7 +7,11 @@
           <ul class="menu-content">
             <li><a class="menu-item" href="{{ route('register-user') }}" data-i18n="nav.dash.ecommerce">add new user</a>
             </li>
+            <li><a class="menu-item" href="{{ route('trip') }}" data-i18n="nav.dash.ecommerce">add new trip</a>
+            </li>
             <li><a class="menu-item" href="{{route('user-show')}}" data-i18n="nav.dash.crypto">user management</a>
+            </li>
+            <li><a class="menu-item" href="{{route('trip-show')}}" data-i18n="nav.dash.crypto">trip management</a>
             </li>
             <li><a class="menu-item" href="dashboard-sales.html" data-i18n="nav.dash.sales">Sales</a>
             </li>

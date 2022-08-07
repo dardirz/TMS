@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\TripController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,11 @@ Route::get('/admin/users', [CustomAuthController::class, 'showUsers'])->name('us
 Route::get('admin/edit/{id}', [CustomAuthController::class, 'edit'])->name('user-edit');
 Route::put('/update/{id}', [CustomAuthController::class, 'update'])->name('user-update');
 Route::delete('/admin/delete/{id}',[CustomAuthController::class,'destroy'])->name('user-delete');
+// trip routes
+Route::get('trip', [TripController::class, 'createTrip'])->name('trip');
+Route::post('custom-trip', [TripController::class, 'customCreateTrip'])->name('trip.custom');
+Route::get('/trips', [TripController::class, 'showTrips'])->name('trip-show');
+Route::get('/trips/edit/{id}', [TripController::class, 'edit'])->name('trip-edit');
+Route::put('/trips/update/{id}', [TripController::class, 'update'])->name('trip-update');
+Route::delete('/trip/delete/{id}',[TripController::class,'destroy'])->name('trip-delete');
+

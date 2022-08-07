@@ -42,6 +42,7 @@ class CustomAuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'type'=>'required'
         ]);
 
         $data = $request->all();
@@ -56,7 +57,8 @@ class CustomAuthController extends Controller
         'name' => $data['name'],
         'email' => $data['email'],
         'phone' => $data['phone'],
-        'password' => Hash::make($data['password'])
+        'password' => Hash::make($data['password']),
+        'type'=>$data['type']
       ]);
     }
 
@@ -66,14 +68,14 @@ class CustomAuthController extends Controller
             return view('dashboard');
 
 
-        return redirect("login")->withSuccess('You are not allowed to access');
+       
     }
 
     public function home(){
 
             return view('home');
         
-        return redirect("login")->withSuccess('You are not allowed to access');
+        
     }
 
     public function signOut() {

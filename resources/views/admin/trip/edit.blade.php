@@ -21,48 +21,36 @@
                         <div class="card-content collapse show">
                             <div class="card-body">
                                 <div class="card-text">
-                                    <p>you can edit a user.</p>
+                                    <p>you can edit a trip.</p>
                                 </div>
-                                <form class="form" action="{{ route('user-update',$user->id) }}" method="POST">
+                                <form class="form" action="{{ route('trip-update',$trip->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-body">
-                                        <h4 class="form-section"><i class="la la-eye"></i> User Details</h4>
+                                        <h4 class="form-section"><i class="la la-eye"></i> Trip Details</h4>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="name">Name</label>
-                                                    <input type="text" id="name" class="form-control border-primary"
-                                                        placeholder="Name" name="name" value="{{$user->name}}">
-                                                    @if ($errors->has('name'))
-                                                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                                                    <label for="driver">driver</label>
+                                                    <input type="text" id="driver" class="form-control border-primary"
+                                                        placeholder="Name" name="driver" value="{{$trip->assigned_to}}">
+                                                    @if ($errors->has('driver'))
+                                                        <span class="text-danger">{{ $errors->first('driver') }}</span>
                                                     @endif
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="email">EMAIL</label>
-                                                    <input type="text" id="email" class="form-control border-primary"
-                                                        placeholder="email" name="email" value="{{$user->email}}">
-                                                    @if ($errors->has('email'))
-                                                        <span class="text-danger">{{ $errors->first('email') }}</span>
+                                                    <label for="begin">begin</label>
+                                                    <input type="text" id="begin" class="form-control border-primary"
+                                                        placeholder="hour:min" name="begin" value="{{$trip->begin}}">
+                                                    @if ($errors->has('begin'))
+                                                        <span class="text-danger">{{ $errors->first('begin') }}</span>
                                                     @endif
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="phone">PHONE</label>
-                                                    <input type="text" id="phone" class="form-control border-primary"
-                                                        placeholder="phone" name="phone" value="{{$user->phone}}">
-                                                    @if ($errors->has('phone'))
-                                                        <span class="text-danger">{{ $errors->first('phone') }}</span>
-                                                    @endif
-                                                </div>
-                                            </div>
-
-                                        </div>
+                                     
                           
 
                                         <button type="button" class="btn btn-warning mr-1">

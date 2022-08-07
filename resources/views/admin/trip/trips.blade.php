@@ -10,7 +10,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title"> User Details</h4>
+                                    <h4 class="card-title"> Trip Details</h4>
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
@@ -26,31 +26,29 @@
                                       <!-- Task List table -->
                                       <div class="table-responsive">
 
-                                        <a href="{{ route('register-user') }}" > <button class="btn btn-primary btn-sm"><i class="ft-plus white"></i>  ADD NEW USER</button></a>
+                                        <a href="{{route('trip')}}" > <button class="btn btn-primary btn-sm"><i class="ft-plus white"></i>  ADD NEW TRIP</button></a>
 
                                             <table id="users-contacts" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
                                             <thead>
                                                 <tr>
                                                     <th></th>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Phone</th>
-                                                    <th>Type</th>
-                                                    <th>Action</th>
+                                                    <th>driver</th>
+                                                    <th>begin</th>
+                                                    <th>action</th>
 
 
                                                 </tr>
                                             </thead>
-                                            @foreach ($user as $user)
+                                            @foreach ($trips as $trip)
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <input type="checkbox" class="input-chk">
+                                                            <input type="checkbox" class="input-chk mr-2">
+                                                             {{$trip->id}}
                                                         </td>
-                                                        <td>{{ $user->name }}</td>
-                                                        <td class="text-center">{{ $user->email }}</td>
-                                                        <td>{{ $user->phone }}</td>
-                                                        <td>{{$user->type}}</td>
+                                                        <td>{{ $trip->assigned_to}}</td>
+                                                        <td class="text-center">{{ $trip->begin }}</td>
+                                                        
                                                         <td>
                                                             <span class="dropdown">
                                                                 <button id="btnSearchDrop2" type="button"
@@ -60,11 +58,11 @@
                                                                         class="ft-settings"></i></button>
                                                                 <span aria-labelledby="btnSearchDrop2"
                                                                     class="dropdown-menu mt-1 dropdown-menu-right">
-                                                                    <a href="{{ route('user-edit', $user->id) }}"
+                                                                    <a href="{{ route('trip-edit', $trip->id) }}"
                                                                         class="dropdown-item"><i class="ft-edit-2"></i>
                                                                         Edit</a>
                                                                     <form role="form"
-                                                                        action="{{ route('user-delete', $user->id) }}"
+                                                                        action="{{route('trip-delete',$trip->id)}}"
                                                                         method="post">
                                                                         @csrf
                                                                         @method('DELETE')
