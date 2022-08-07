@@ -7,7 +7,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title" id="basic-layout-colored-form-control">User Profile</h4>
+                            <h4 class="card-title" id="basic-layout-colored-form-control">Point</h4>
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
@@ -27,7 +27,7 @@
                                     @csrf
                                     @method('PUT')
                                     <div class="form-body">
-                                        <h4 class="form-section"><i class="la la-eye"></i> User Details</h4>
+                                        <h4 class="form-section"><i class="la la-eye"></i> Point Details</h4>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -91,11 +91,16 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="activity">activity</label>
-                                                    <input type="text" id="activity" class="form-control border-primary"
-                                                        placeholder="Name" name="activity" value="{{$point->activity}}">
-                                                    @if ($errors->has('activity'))
-                                                        <span class="text-danger">{{ $errors->first('activity') }}</span>
+                                                    <label for="activity_id">activity</label>
+                                                    <select name="activity_id" id="activity_id" class="c-select form-control">
+
+                                                    @foreach ($activities as $activity)
+
+                                                    <option value="{{ $activity->id }}" {{ $activity->id == $point->activity_id ? 'selected' : '' }} >{{ $activity->name }}</option>
+                                                    @endforeach
+                                                    </select>
+                                                    @if ($errors->has('activity_id'))
+                                                        <span class="text-danger">{{ $errors->first('activity_id') }}</span>
                                                     @endif
                                                 </div>
                                             </div>

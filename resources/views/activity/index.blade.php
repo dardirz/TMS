@@ -34,7 +34,7 @@
                                                 <tr>
                                                     <th></th>
                                                     <th>Name</th>
-                                                    <th>time</th>
+                                                    <th>Action</th>
 
 
 

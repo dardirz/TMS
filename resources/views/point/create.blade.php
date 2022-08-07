@@ -7,7 +7,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title" id="basic-layout-colored-form-control">User Profile</h4>
+                            <h4 class="card-title" id="basic-layout-colored-form-control">Points</h4>
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
@@ -26,7 +26,7 @@
                                 <form class="form" action="{{ route('point.store') }}" method="POST">
                                     @csrf
                                     <div class="form-body">
-                                        <h4 class="form-section"><i class="la la-eye"></i> User Details</h4>
+                                        <h4 class="form-section"><i class="la la-eye"></i> Point Details</h4>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -91,11 +91,14 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="activity_id">activity</label>
-                                                    <input type="text" id="activity_id" class="form-control border-primary"
-                                                        placeholder="activity" name="activity_id">
-                                                    @if ($errors->has('activity_id'))
-                                                        <span class="text-danger">{{ $errors->first('activity_id') }}</span>
-                                                    @endif
+                                                    <select name="activity_id" id="activity_id" class="c-select form-control">
+                                                        @foreach ($activities as $user)
+                                                        <option value="{{$user->id}}" >{{$user->name}}</option>
+                                                        @endforeach
+                                                        </select>
+                                                        @if ($errors->has('activity_id'))
+                                                            <span class="text-danger">{{ $errors->first('activity_id') }}</span>
+                                                        @endif
                                                 </div>
                                             </div>
 

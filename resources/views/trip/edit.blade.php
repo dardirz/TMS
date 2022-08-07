@@ -31,9 +31,15 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="name">Name</label>
-                                                    <input type="text" id="user_id" class="form-control border-primary"
-                                                        placeholder="Name" name="user_id" value="{{$trip->user->name}}">
+                                                    
+                                                    <label for="name">Name</label> <br>
+                                                    <select name="user_id" id="user_id" class="c-select form-control">
+                                                        <option selected>Choose...</option>
+                                                    @foreach ($users as $user)
+
+                                                    <option value="{{ $user->id }}" {{ $user->id == $trip->user_id ? 'selected' : '' }} >{{ $user->name }}</option>
+                                                    @endforeach
+                                                    </select>
                                                     @if ($errors->has('user_id'))
                                                         <span class="text-danger">{{ $errors->first('user_id') }}</span>
                                                     @endif

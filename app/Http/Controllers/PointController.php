@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Point;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class PointController extends Controller
      */
     public function create()
     {
-        return view('point.create');
+        $activities = Activity::all();
+        return view('point.create',compact('activities'));
     }
 
     /**
@@ -36,14 +38,19 @@ class PointController extends Controller
      */
     public function store(Request $request)
     {
+        $activity_id = Activity::findOrFail($request->activity_id);
+        $name = $activity_id->name;
+
         $request->validate([
             'name' => 'required',
             'type'=>'required',
             'location'=>'required',
             'address'=>'required',
+            'activity_id'=>'required',
         ]);
         $data = $request->all();
-        $show = Point::create($data);
+        $point = Point::create($data);
+        $att =$point->activities()->syncWithoutDetaching($activity_id);
         return redirect('admin/point')->with('success', 'Point Data is successfully Created');
     }
 
@@ -66,8 +73,9 @@ class PointController extends Controller
      */
     public function edit( $id)
     {
+        $activities = Activity::all();
         $point = Point::findOrFail($id);
-        return view('point.edit', compact('point'));
+        return view('point.edit', compact('point','activities'));
     }
 
     /**
@@ -79,13 +87,23 @@ class PointController extends Controller
      */
     public function update(Request $request,  $id)
     {
+        $activity_id = Activity::findOrFail($request->activity_id);
+
+
         $validatedData = $request->validate([
             'name' => 'required',
             'type'=>'required',
             'location'=>'required',
             'address'=>'required',
+            'activity_id' => 'required',
+            'latitude' => 'required',
+            'longitude'=>'required',
+
         ]);
-        Point::whereId($id)->update($validatedData);
+
+        $point = Point::whereId($id)->update($validatedData);
+        $point1 = Point::findOrFail($id);
+        $att =$point1->activities()->sync($activity_id);
         return redirect('admin/point')->with('success', 'Point Data is successfully Updated ');
     }
 

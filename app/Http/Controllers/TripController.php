@@ -40,6 +40,7 @@ class TripController extends Controller
     {
         $request->validate([
             'time' => 'required',
+            'user_id' => 'required',
         ]);
         $data = $request->all();
         $show = Trip::create($data);
@@ -65,8 +66,9 @@ class TripController extends Controller
      */
     public function edit( $id)
     {
+        $users = User::all();
         $trip = Trip::findOrFail($id);
-        return view('trip.edit',compact('trip'));
+        return view('trip.edit',compact('trip','users'));
     }
 
     /**
@@ -80,8 +82,10 @@ class TripController extends Controller
     {
         $validatedData = $request->validate([
             'time' => 'required',
+            'user_id' => 'required',
         ]);
         Trip::whereId($id)->update($validatedData);
+
         return redirect('admin/trip')->with('success', 'Trip Data is successfully Updated ');
     }
 

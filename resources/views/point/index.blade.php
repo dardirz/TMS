@@ -11,7 +11,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title"> User Details</h4>
+                                    <h4 class="card-title"> Point Details</h4>
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
@@ -40,6 +40,7 @@
                                                     <th>latitude</th>
                                                     <th>longitude</th>
                                                     <th>activity</th>
+                                                    <th>action</th>
 
 
 
@@ -57,7 +58,7 @@
                                                         <td>{{ $user->address }}</td>
                                                         <td>{{ $user->latitude }}</td>
                                                         <td>{{ $user->longitude }}</td>
-                                                        <td>{{ $user->activity_id }}</td>
+                                                        <td>{{ $user->activities()->first()->name }}</td>
 
                                                         <td>
                                                             <span class="dropdown">
