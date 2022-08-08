@@ -11,7 +11,7 @@ use App\Http\Controllers\TripController;
 | Web Routes
 |--------------------------------------------------------------------------
 */
-Route::group(['middleware' => ['auth', 'web']], function() {
+Route::group(['middleware' => ['auth', 'super']], function() {
 
 Route::get('dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard');
 

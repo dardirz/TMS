@@ -8,27 +8,21 @@ use Illuminate\Support\Facades\Auth;
 
 class UserType
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
-     */
+
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()){
-            $user = Auth::user();
 
-            if($user->type=='user'){
 
-                return redirect(route('login'));
-             }
+       $user = Auth::user();
+
+       if($user->type =='user'){
+          // return response('you are not allowed');
+           return redirect(route('login'));
         }
-        else{
-            return redirect(route('login'));
-        }
-
-
+        return $next($request);
     }
+
+
+
+
 }
