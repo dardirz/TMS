@@ -13,17 +13,10 @@ class PointService {
         return Point::all();
     }
 
-    public function store(Request $request){
+    public function store($data,$request){
+
         $activity_id = Activity::findOrFail($request->activity_id);
-        $name = $activity_id->name;
-        $request->validate([
-            'name' => 'required',
-            'type'=>'required',
-            'location'=>'required',
-            'address'=>'required',
-            'activity_id'=>'required',
-        ]);
-        $data = $request->all();
+
         $point = Point::create($data);
         $att =$point->activities()->syncWithoutDetaching($activity_id);
         return $point;
@@ -34,27 +27,18 @@ class PointService {
         return Point::findOrFail($id);
     }
 
-    public function update(Request $request,  $id){
+    public function update( $data,  $id,$request){
 
         $activity_id = Activity::findOrFail($request->activity_id);
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'type'=>'required',
-            'location'=>'required',
-            'address'=>'required',
-            'activity_id' => 'required',
-            'latitude' => 'required',
-            'longitude'=>'required',
-        ]);
 
-        $point = Point::whereId($id)->update($validatedData);
+        $point = Point::whereId($id)->update($data);
         $point1 = Point::findOrFail($id);
         $att =$point1->activities()->sync($activity_id);
         return $point;
         return $att;
     }
 
-    public function deleter($id){
+    public function delete($id){
         $point = $this->findOne($id);
         return $point->delete();
     }

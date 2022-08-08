@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PointRequest;
 use App\Models\Activity;
 use App\Models\Point;
 use App\Services\ActivityService;
@@ -38,9 +39,10 @@ class PointController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,PointService $pointService)
+    public function store(PointRequest $request,PointService $pointService)
     {
-        $pointService->store($request);
+        $data = $request->validated();
+        $pointService->store($data,$request);
         return redirect('admin/point')->with('success', 'Point Data is successfully Created');
     }
 
@@ -75,10 +77,10 @@ class PointController extends Controller
      * @param  \App\Models\Point  $point
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id,PointService $pointService)
+    public function update(PointRequest $request,  $id,PointService $pointService)
     {
-        $activity_id = $request->activity_id;
-        $update = $pointService->update( $id,$activity_id);
+        $data = $request->validated();
+        $update = $pointService->update($data, $id,$request);
         return redirect('admin/point')->with('success', 'Point Data is successfully Updated ');
     }
 
