@@ -7,7 +7,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title" id="basic-layout-colored-form-control">User Profile</h4>
+                            <h4 class="card-title" id="basic-layout-colored-form-control">Trip Edit</h4>
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
@@ -21,13 +21,13 @@
                         <div class="card-content collapse show">
                             <div class="card-body">
                                 <div class="card-text">
-                                    <p>you can edit a user.</p>
+                                    <p>you can edit a trip.</p>
                                 </div>
                                 <form class="form" action="{{ route('trip.update',$trip->id) }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-body">
-                                        <h4 class="form-section"><i class="la la-eye"></i> User Details</h4>
+                                        <h4 class="form-section"><i class="la la-eye"></i> trip Details</h4>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -48,7 +48,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="time">Date</label>
-                                                    <input type="text" id="time" class="form-control border-primary"
+                                                    <input type="datetime-local" id="time" class="form-control border-primary"
                                                         placeholder="time" name="time" value="{{$trip->time}}">
                                                     @if ($errors->has('time'))
                                                         <span class="text-danger">{{ $errors->first('time') }}</span>

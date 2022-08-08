@@ -41,7 +41,8 @@ class ActivityController extends Controller
      */
     public function store(ActivityRequest $request,ActivityService $activityService)
     {
-        $show = $activityService->store($request);
+        $validated = $request->validated();
+        $show = $activityService->store($validated);
         return redirect('admin/activity')->with('success', 'Activity Data is successfully Created');
     }
 
@@ -75,9 +76,10 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id,ActivityService $activityService)
+    public function update(ActivityRequest $request,$id,ActivityService $activityService)
     {
-       $update = $activityService->update($request, $id);
+        $validated = $request->validated();
+       $update = $activityService->update($validated, $id);
        return redirect('admin/activity')->with('success', 'Activity Data is successfully updated');
     }
 

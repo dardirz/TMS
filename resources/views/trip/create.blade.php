@@ -7,7 +7,7 @@
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title" id="basic-layout-colored-form-control">User Profile</h4>
+                            <h4 class="card-title" id="basic-layout-colored-form-control">Trip Profile</h4>
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
@@ -21,12 +21,12 @@
                         <div class="card-content collapse show">
                             <div class="card-body">
                                 <div class="card-text">
-                                    <p>you can add a new user.</p>
+                                    <p>you can add a new Trip.</p>
                                 </div>
                                 <form class="form" action="{{ route('trip.store') }}" method="POST">
                                     @csrf
                                     <div class="form-body">
-                                        <h4 class="form-section"><i class="la la-eye"></i> User Details</h4>
+                                        <h4 class="form-section"><i class="la la-eye"></i> Trip Details</h4>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">

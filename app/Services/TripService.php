@@ -11,12 +11,7 @@ class TripService {
     }
 
 
-    public function store(Request $request){
-        $request->validate([
-            'time' => 'required|date_format:format',
-            'user_id' => 'required',
-        ]);
-        $data = $request->all();
+    public function store($data){
        return Trip::create($data);
     }
 
@@ -24,12 +19,9 @@ class TripService {
         return  Trip::findOrFail($id);
     }
 
-    public function update(Request $request,  $id){
-        $validatedData = $request->validate([
-            'time' => 'required',
-            'user_id' => 'required',
-        ]);
-        Trip::whereId($id)->update($validatedData);
+    public function update($data,  $id){
+
+        Trip::whereId($id)->update($data);
 
     }
 

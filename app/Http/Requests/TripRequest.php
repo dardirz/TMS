@@ -24,7 +24,7 @@ class TripRequest extends FormRequest
     public function rules()
     {
         return [
-            'time' => 'required|date_format:format',
+            'time' => 'required',
             'user_id' => 'required',
         ];
     }

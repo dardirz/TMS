@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Services;
-use Illuminate\Http\Request;
+
 use App\Models\Activity;
 
 class ActivityService
@@ -11,23 +11,20 @@ class ActivityService
         return Activity::all();
     }
 
-    public function store(){
+    public function store($data){
 
-        $data = ['name'];
-        $show = Activity::create($data);
-        return $show;
+        return Activity::create($data);
+
     }
 
     public function findOne($id){
         return  Activity::findOrFail($id);
     }
 
-    public function update(Request $request,  $id){
-        $validatedData = $request->validate([
-            'name' => 'required',
-        ]);
+    public function update( $data , $id){
 
-      return Activity::whereId($id)->update($validatedData);
+
+      return Activity::whereId($id)->update($data);
     }
 
     public function delete($id){
