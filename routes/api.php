@@ -34,6 +34,6 @@ Route::group([
 });
 
 
-Route::get('/activities', function () {
-    return ActivityResource::collection(Activity::all());
+Route::get('/activities',  {
+
 });
