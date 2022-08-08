@@ -33,9 +33,9 @@
                                                 <div class="form-group">
                                                     <label for="driver">driver</label>
                                                     <input type="text" id="driver" class="form-control border-primary"
-                                                        placeholder="Name" name="driver" value="{{$trip->assigned_to}}">
-                                                    @if ($errors->has('driver'))
-                                                        <span class="text-danger">{{ $errors->first('driver') }}</span>
+                                                        placeholder="Name" name="assigned_to" value="{{$trip->assigned_to}}">
+                                                    @if ($errors->has('assigned_to'))
+                                                        <span class="text-danger">{{ $errors->first('assigned_to') }}</span>
                                                     @endif
                                                 </div>
                                             </div>

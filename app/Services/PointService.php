@@ -9,15 +9,6 @@ class PointService
 {
     public function createPoint($request)
     {
-        // Point::create([
-        //     'name'=>$request->name,
-        //     'location'=>$request->location,
-        //     'address'=>$request->address,
-        //     'long'=>$request->long,
-        //     'lat'=>$request->lat,
-        //     'type'=>$request->type,
-        //     'activity'=>$request->activity
-        // ]);
         $point = new Point;
         $point->name = $request->name;
         $point->location = $request->location;
@@ -28,6 +19,7 @@ class PointService
         $point->save();
         $activities = Activity::find($request->activities);
         $point->activities()->attach($activities);
+        return $point;
     }
     public function updatePoint($request, $id)
     {
@@ -43,6 +35,7 @@ class PointService
         ]);
         $activities = Activity::find($request->activities);
         $point->activities()->attach($activities);
+        return $point;
     }
     public function delete($id)
     {
@@ -53,9 +46,7 @@ class PointService
     public function removeActivity(Point $point)
     {
         $activity = Activity::find($point->activity);
-
         $point->activities()->detach($activity);
-
         return 'Success';
     }
 }

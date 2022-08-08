@@ -16,7 +16,8 @@ class ActivityController extends Controller
      */
     public function index()
     {
-        //
+        $activities = Activity::paginate(10);
+        return view('admin.activity.activities', ['activities' => $activities]);
     }
 
     /**
@@ -48,11 +49,7 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function show()
-    {
-        $activities = Activity::all();
-        return view('admin.activity.activities', ['activities' => $activities]);
-    }
+  
 
     /**
      * Show the form for editing the specified resource.

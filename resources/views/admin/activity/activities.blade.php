@@ -81,6 +81,8 @@
                                             @endforeach
                                             </tfoot>
                                         </table>
+                                        {{$activities->links()}}
+
                                     </div>
                                     </div>
                                 </div>

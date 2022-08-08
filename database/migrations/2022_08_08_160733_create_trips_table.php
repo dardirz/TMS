@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTripsTable extends Migration
+class CreateTripsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -16,7 +16,8 @@ class AddTripsTable extends Migration
         Schema::create('trips', function (Blueprint $table) {
             $table->increments('id');
             $table->datetime('begin');
-            $table->foreignId('assigned_to')->references('id')->on('users');
+            $table->foreignId('assigned_to')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +28,6 @@ class AddTripsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('trips');
     }
 }

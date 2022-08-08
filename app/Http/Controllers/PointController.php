@@ -17,7 +17,8 @@ class PointController extends Controller
      */
     public function index()
     {
-        //
+        $points = Point::paginate(10);
+        return view('admin.point.points', ['points' => $points]);
     }
 
     /**
@@ -49,11 +50,7 @@ class PointController extends Controller
      * @param  \App\Models\Point  $point
      * @return \Illuminate\Http\Response
      */
-    public function show()
-    {
-        $points = Point::all();
-        return view('admin.point.points', ['points' => $points]);
-    }
+  
 
     /**
      * Show the form for editing the specified resource.
@@ -77,8 +74,8 @@ class PointController extends Controller
      */
     public function update(PointsRequest $request, PointService $point, $id)
     {
-        $point->updatePoint($request, $id);     //function trip::create in TripService
-        return redirect(route('point-show'))->with('sucess', 'updated');
+        $point->updatePoint($request, $id);     
+        return redirect(route('point-show'));
     }
 
     /**

@@ -1,102 +1,128 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Hash;
+use Session;
 use App\Models\User;
-use Validator;
-
+use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
-    /**
-     * Create a new AuthController instance.
-     *
-     * @return void
-     */
-    public function __construct() {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
-        auth()->setDefaultDriver('api');
-    }
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function login(Request $request){
-    	$validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required|string|min:6',
-        ]);
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-        if (! $token = auth()->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-        return $this->createNewToken($token);
-    }
-    /**
-     * Register a User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function register(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|between:2,100',
-            'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|confirmed|min:6',
-            'phone' => 'required',
-        ]);
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
-        }
-        $user = User::create(array_merge(
-                    $validator->validated(),
-                    ['password' => bcrypt($request->password)]
-                ));
-        return response()->json([
-            'message' => 'User successfully registered',
-            'user' => $user
-        ], 201);
+    public function index()
+    {
+        return view('auth.login');
     }
 
-    /**
-     * Log the user out (Invalidate the token).
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function logout() {
-        auth()->logout();
-        return response()->json(['message' => 'User successfully signed out']);
-    }
-    /**
-     * Refresh a token.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function refresh() {
-        return $this->createNewToken(auth()->refresh());
-    }
-    /**
-     * Get the authenticated User.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function userProfile() {
-        return response()->json(auth()->user());
-    }
-    /**
-     * Get the token array structure.
-     *
-     * @param  string $token
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    protected function createNewToken($token){
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()
+    public function customLogin(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
         ]);
+
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('/')
+                        ->withSuccess('Signed in');
+        }
+
+        return redirect("login")->withSuccess('Login details are not valid');
     }
+
+    public function registration()
+    {
+
+        return view('auth.registration');
+
+    }
+
+    public function customRegistration(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required',
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
+            'type'=>'required'
+        ]);
+
+        $data = $request->all();
+        $check = $this->create($data);
+
+        return redirect("/")->withSuccess('You have signed-in');
+    }
+
+    public function create(array $data)
+    {
+      return User::create([
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'phone' => $data['phone'],
+        'password' => Hash::make($data['password']),
+        'type'=>$data['type']
+      ]);
+    }
+
+    public function dashboard()
+    {
+
+            return view('dashboard');
+
+
+       
+    }
+
+    public function home(){
+
+            return view('home');
+        
+        
+    }
+
+    public function signOut() {
+        Session::flush();
+        Auth::logout();
+
+        return Redirect('login');
+    }
+
+    public function showUsers(){
+        $user = User::all();
+        return view('admin.user.users',['user'=>$user]);
+    }
+
+    public function edit($id){
+        $user = User::findOrFail($id);
+        return view('admin.user.edit',['user'=>$user]);
+    }
+
+    public function update(Request $request,$id){
+
+        $validator=$request->validate([
+            'phone' => 'required',
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+
+        if($validator){
+
+            $user = User::findOrFail($id);
+            $user->update($request->all());
+            return redirect(route('user-show'))->with('sucess','updated');
+        }else{
+            return back()->with('fail','some error');
+        }
+
+
+    }
+
+    public function destroy( $id)
+    {
+        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect(route('user-show'))->with('sucess', 'User is Deleted Successful!');
+    }
+
+
+
 }

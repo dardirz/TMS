@@ -10,22 +10,23 @@ use Illuminate\Support\Facades\Auth;
 
 class TripController extends Controller
 {
-    public function createTrip()
+    public function index()
+    {
+        $trips = Trip::paginate(10);
+        $users = user::all();
+        return view('admin.trip.trips', ['trips' => $trips,'users'=>$users]);
+    }
+    public function create()
     {   
         $users = User::all();
         return view('admin.trip.add',compact('users'));
     }
-    public function customCreateTrip(TripRequest $request, TripService $trip)
+    public function store(TripRequest $request, TripService $trip)
     {
         $trip->createTrip($request);    //function trip::create in TripService
-        return redirect(url('trip'));
+        return redirect(url('trips'));
     }
-    public function showTrips()
-    {
-        $trips = Trip::all();
-        $users = user::all();
-        return view('admin.trip.trips', ['trips' => $trips,'users'=>$users]);
-    }
+ 
     public function edit($id)
     {
         $trip = Trip::findOrFail($id);
@@ -34,7 +35,7 @@ class TripController extends Controller
     public function update(TripRequest $request, TripService $trip, $id)
     {
 
-        $trip->updateTrip($request, $id);     //function trip::create in TripService
+        $trip->updateTrip($request, $id);     
         return redirect(route('trip-show'))->with('sucess', 'updated');
     }
     public function destroy(TripService $trip,$id)

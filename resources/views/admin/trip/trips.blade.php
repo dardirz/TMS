@@ -82,6 +82,8 @@
                                             @endforeach
                                             </tfoot>
                                         </table>
+                                        {{$trips->links()}}
+
                                     </div>
                                     </div>
                                 </div>

@@ -88,6 +88,8 @@
                                             @endforeach
                                             </tfoot>
                                         </table>
+                                        {{$points->links()}}
+                                        
                                     </div>
                                 </div>
                             </div>

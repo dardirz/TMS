@@ -11,13 +11,15 @@ use App\Models\Trip;
             'assigned_to'=>$trip->assigned_to,
             'begin'=>$trip->begin
           ]);
+          return $trip;
     }
     public function updateTrip($request,$id){
       $trip = Trip::findOrFail($id);
       $trip->update([
-        'assigned_to'=>$request->driver,
+        'assigned_to'=>$request->assigned_to,
         'begin'=>$request->begin
     ]);
+    return $trip;
     }
     public function delete($id){
       $trip = Trip::findOrFail($id);
