@@ -15,47 +15,51 @@ class ActivityApiController extends Controller
     {
         $activity = $activityService->index();
 
-        return view('activity.index', compact('activity'));
+        return ActivityResource::collection( $activity);
 
     }
 
     public function create()
     {
-        return view('activity.create');
+
     }
 
 
     public function store(ActivityRequest $request,ActivityService $activityService)
     {
+        $show = new Activity();
         $validated = $request->validated();
         $show = $activityService->store($validated);
-        return redirect('admin/activity')->with('success', 'Activity Data is successfully Created');
+        return new ActivityResource( $show);
     }
 
 
-    public function show(Activity $activity)
+    public function show( $id)
     {
-        //
+        $activity = Activity::findOrFail($id);
+        return new ActivityResource( $activity);
     }
 
 
     public function edit(ActivityService $activityService,$id)
     {
-        $activity = $activityService->findOne($id);
-        return view('activity.edit', compact('activity'));
+
     }
 
 
     public function update(ActivityRequest $request,$id,ActivityService $activityService)
     {
-        $validated = $request->validated();
+
+       $validated = $request->validated();
        $update = $activityService->update($validated, $id);
-       return redirect('admin/activity')->with('success', 'Activity Data is successfully updated');
+       return new ActivityResource($update);
     }
 
     public function destroy( $id,ActivityService $activityService)
     {
+
         $deleted = $activityService->delete($id);
-        return redirect('admin/activity')->with('success', 'Activity Data is successfully Deleted');
+        return new ActivityResource($deleted);
+
     }
 }

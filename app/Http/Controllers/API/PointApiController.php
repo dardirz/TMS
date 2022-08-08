@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\PointRequest;
+use App\Http\Resources\PointResource;
 use App\Models\Activity;
 use App\Models\Point;
 use App\Services\ActivityService;
@@ -15,36 +16,35 @@ class PointApiController extends Controller
     public function index(PointService $pointService)
     {
         $point = $pointService->index();
-        return view('point.index', compact('point'))->with('activities');
+        return PointResource::collection($point);
     }
 
 
     public function create(ActivityService $activityService)
     {
-        $activities = $activityService->index();
-        return view('point.create',compact('activities'));
+
     }
 
 
     public function store(PointRequest $request,PointService $pointService)
     {
+        $pointService = new Point();
         $data = $request->validated();
         $pointService->store($data,$request);
-        return redirect('admin/point')->with('success', 'Point Data is successfully Created');
+        return new PointResource($pointService);
     }
 
 
-    public function show(Point $point)
+    public function show( $id)
     {
-        //
+        $point = Point::findOrFail($id);
+        return new PointResource($point);
     }
 
 
     public function edit( $id,ActivityService $activityService,PointService $pointService)
     {
-        $activities = $activityService->index();
-        $point = $pointService->findOne($id);
-        return view('point.edit', compact('point','activities'));
+
     }
 
 
@@ -52,13 +52,14 @@ class PointApiController extends Controller
     {
         $data = $request->validated();
         $update = $pointService->update($data, $id,$request);
-        return redirect('admin/point')->with('success', 'Point Data is successfully Updated ');
+        return new PointResource($update);
     }
 
 
     public function destroy( $id,PointService $pointService)
     {
+
         $deleted = $pointService->delete($id);
-        return redirect('admin/point')->with('success', 'Point Data is successfully Deleted');
+        return new PointService($deleted);
     }
 }

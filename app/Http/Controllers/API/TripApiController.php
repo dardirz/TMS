@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\TripRequest;
+use App\Http\Resources\TripResource;
 use App\Models\Trip;
 use App\Models\User;
 use App\Services\TripService;
@@ -15,36 +16,35 @@ class TripApiController extends Controller
     public function index(TripService $tripService)
     {
         $trip = $tripService->index();
-        return view('trip.index',compact('trip'));
+        return TripResource::collection( $trip);
     }
 
 
     public function create(UserService $userService)
     {
-        $users = $userService->index();
-        return view('trip.create',compact('users'));
+
     }
 
 
     public function store(TripRequest $request,TripService $tripService)
     {
+        $tripService = new Trip();
         $data = $request->validated();
         $tripService->store($data);
-        return redirect('admin/trip')->with('success', 'trip Data is successfully Created');
+        return new TripResource($tripService);
     }
 
 
-    public function show(Trip $trip)
+    public function show( $id)
     {
-        //
+        $trip = Trip::findOrFail($id);
+        return new TripResource( $trip);
     }
 
 
     public function edit( $id,UserService $userService,TripService $tripService)
     {
-        $users = $userService-> index();
-        $trip = $tripService->findOne($id);
-        return view('trip.edit',compact('trip','users'));
+
     }
 
 
@@ -52,13 +52,13 @@ class TripApiController extends Controller
     {
         $data = $request->validated();
         $tripService->update( $data, $id);
-        return redirect('admin/trip')->with('success', 'Trip Data is successfully Updated ');
+       return new TripResource($tripService);
     }
 
 
     public function destroy( $id , TripService $tripService)
     {
         $tripService->delete($id);
-        return redirect('admin/trip')->with('success', 'trip Data is successfully Deleted');
+        return new TripResource($tripService);
     }
 }
