@@ -20,5 +20,6 @@
   <!-- BEGIN PAGE LEVEL JS-->
   <script src="{{asset('dashboard/app-assets/js/scripts/extensions/block-ui.js')}}" type="text/javascript"></script>
   <script src="{{asset('dashboard/app-assets/js/scripts/extensions/toastr.js')}}"" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js" integrity="sha512-yDlE7vpGDP7o2eftkCiPZ+yuUyEcaBwoJoIhdXv71KZWugFqEphIS3PU60lEkFaz8RxaVsMpSvQxMBaKVwA5xg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @yield('scripts')
 </body>

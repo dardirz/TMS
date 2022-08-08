@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TripRequest extends FormRequest
+class PointsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,12 @@ class TripRequest extends FormRequest
     public function rules()
     {
         return [
-            'assigned_to'=>'required',
-            'begin'=>'required'
+            'name'=>'required|string',
+            'type'=>'required',
+            'location'=>'required|string',
+            'address'=>'required|string',
+            'long'=>'required|string',
+            
         ];
     }
 }

@@ -15,8 +15,8 @@ class AddTripsTable extends Migration
     {
         Schema::create('trips', function (Blueprint $table) {
             $table->increments('id');
-            $table->time('begin');
-            $table->string('assigned_to');
+            $table->datetime('begin');
+            $table->foreignId('assigned_to')->references('id')->on('users');
         });
     }
 

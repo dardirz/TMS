@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Item;
 use App\Http\Requests\TripRequest;
 use App\Models\Trip;
 use App\Models\User;
@@ -11,19 +11,20 @@ use Illuminate\Support\Facades\Auth;
 class TripController extends Controller
 {
     public function createTrip()
-    {
-        return view('admin.trip.add');
+    {   
+        $users = User::all();
+        return view('admin.trip.add',compact('users'));
     }
     public function customCreateTrip(TripRequest $request, TripService $trip)
     {
-        //$user = Auth::user();
         $trip->createTrip($request);    //function trip::create in TripService
         return redirect(url('trip'));
     }
     public function showTrips()
     {
         $trips = Trip::all();
-        return view('admin.trip.trips', ['trips' => $trips]);
+        $users = user::all();
+        return view('admin.trip.trips', ['trips' => $trips,'users'=>$users]);
     }
     public function edit($id)
     {
@@ -41,4 +42,5 @@ class TripController extends Controller
         $trip->delete($id);
         return redirect(route('trip-show'))->with('sucess', 'User is Deleted Successful!');
     }
+   
 }

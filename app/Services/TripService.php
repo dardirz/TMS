@@ -6,8 +6,9 @@ use App\Models\Trip;
 
  class TripService {
     public function createTrip($trip){
+          
           $trip = Trip::create([
-            'assigned_to'=>$trip->driver,
+            'assigned_to'=>$trip->assigned_to,
             'begin'=>$trip->begin
           ]);
     }

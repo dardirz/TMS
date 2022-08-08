@@ -9,9 +9,17 @@
             </li>
             <li><a class="menu-item" href="{{ route('trip') }}" data-i18n="nav.dash.ecommerce">add new trip</a>
             </li>
+            <li><a class="menu-item" href="{{ route('activity') }}" data-i18n="nav.dash.ecommerce">add new activity</a>
+            </li>
+            <li><a class="menu-item" href="{{ route('point') }}" data-i18n="nav.dash.ecommerce">add new point</a>
+            </li>
             <li><a class="menu-item" href="{{route('user-show')}}" data-i18n="nav.dash.crypto">user management</a>
             </li>
             <li><a class="menu-item" href="{{route('trip-show')}}" data-i18n="nav.dash.crypto">trip management</a>
+            </li>
+            <li><a class="menu-item" href="{{route('activity-show')}}" data-i18n="nav.dash.crypto">activity management</a>
+            </li>
+            <li><a class="menu-item" href="{{route('point-show')}}" data-i18n="nav.dash.crypto">point management</a>
             </li>
             <li><a class="menu-item" href="dashboard-sales.html" data-i18n="nav.dash.sales">Sales</a>
             </li>

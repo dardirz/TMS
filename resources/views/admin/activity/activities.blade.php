@@ -10,7 +10,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title"> Trip Details</h4>
+                                    <h4 class="card-title"> Activity Details</h4>
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
@@ -26,28 +26,27 @@
                                       <!-- Task List table -->
                                       <div class="table-responsive">
 
-                                        <a href="{{route('trip')}}" > <button class="btn btn-primary btn-sm"><i class="ft-plus white"></i>  ADD NEW TRIP</button></a>
+                                        <a href="{{route('activity')}}" > <button class="btn btn-primary btn-sm"><i class="ft-plus white"></i>  ADD NEW ACTIVITY</button></a>
 
                                             <table id="users-contacts" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
                                             <thead>
                                                 <tr>
                                                     <th></th>
-                                                    <th>driver</th>
-                                                    <th>begin</th>
+                                                    <th>Activity</th>
+                                                    
                                                     <th>action</th>
 
 
                                                 </tr>
                                             </thead>
-                                            @foreach ($trips as $trip)
+                                            @foreach ($activities as $activity)
                                                 <tbody>
                                                     <tr>
                                                         <td>
                                                             <input type="checkbox" class="input-chk mr-2">
-                                                             {{$trip->id}}
+                                                             
                                                         </td>
-                                                        <td>{{$users->find($trip->assigned_to)->name}}</td>
-                                                        <td class="text-center">{{ $trip->begin }}</td>
+                                                        <td>{{$activity->name}}</td>
                                                         
                                                         <td>
                                                             <span class="dropdown">
@@ -58,11 +57,11 @@
                                                                         class="ft-settings"></i></button>
                                                                 <span aria-labelledby="btnSearchDrop2"
                                                                     class="dropdown-menu mt-1 dropdown-menu-right">
-                                                                    <a href="{{ route('trip-edit', $trip->id) }}"
+                                                                    <a href="{{route('activity-edit',$activity->id)}}"
                                                                         class="dropdown-item"><i class="ft-edit-2"></i>
                                                                         Edit</a>
                                                                     <form role="form"
-                                                                        action="{{route('trip-delete',$trip->id)}}"
+                                                                        action="{{route('activity-delete',$activity->id)}}"
                                                                         method="post">
                                                                         @csrf
                                                                         @method('DELETE')

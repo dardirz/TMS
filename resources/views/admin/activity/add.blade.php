@@ -21,35 +21,23 @@
                     <div class="card-content collapse show">
                         <div class="card-body">
                             <div class="card-text">
-                                <p>you can add a new trip.</p>
+                                <p>you can add a new activity.</p>
                             </div>
-                            <form class="form" action="{{route('trip.custom')}}" method="POST">
+                            <form class="form" action="{{route('activity.custom')}}" method="POST">
                                 @csrf
                                 <div class="form-body">
-                                    <h4 class="form-section"><i class="la la-eye"></i> Trip details</h4>
+                                    <h4 class="form-section"><i class="la la-eye"></i> activity details</h4>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="name">driver</label>
-                                                <select class="custom-select w-50 ml-5" name="assigned_to" id="inputGroupSelect01">
-                                                    @foreach($users as $user)
-                                                    <option value="{{$user->id}}">{{$user->name}}</option>
-                                                    @endforeach
-                                                </select>
-                                                @if ($errors->has('driver'))
-                                                <span class="text-danger">{{ $errors->first('driver') }}</span>
+                                                <label for="name">Name</label>
+                                                <input type="text" class="form-control border-primary" name="name" placeholder="name">
+                                                @if ($errors->has('name'))
+                                                <span class="text-danger">{{ $errors->first('name') }}</span>
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label for="email">begin at</label>
-                                                <input type="datetime-local" id="begin" class="form-control border-primary" placeholder="hour : min" name="begin">
-                                                @if ($errors->has('begin'))
-                                                <span class="text-danger">{{ $errors->first('begin') }}</span>
-                                                @endif
-                                            </div>
-                                        </div>
+                                    
                                     </div>
 
                                     <button type="button" class="btn btn-warning mr-1">
