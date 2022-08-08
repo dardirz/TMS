@@ -77,7 +77,8 @@ class PointController extends Controller
      */
     public function update(Request $request,  $id,PointService $pointService)
     {
-        $update = $pointService->update($request, $id);
+        $activity_id = $request->activity_id;
+        $update = $pointService->update( $id,$activity_id);
         return redirect('admin/point')->with('success', 'Point Data is successfully Updated ');
     }
 

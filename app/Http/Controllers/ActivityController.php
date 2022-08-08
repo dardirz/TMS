@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ActivityRequest;
 use App\Http\Resources\ActivityResource;
 use App\Models\Activity;
 use App\Services\ActivityService;
@@ -38,9 +39,8 @@ class ActivityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ActivityService $activityService,Request $request)
+    public function store(ActivityRequest $request,ActivityService $activityService)
     {
-
         $show = $activityService->store($request);
         return redirect('admin/activity')->with('success', 'Activity Data is successfully Created');
     }

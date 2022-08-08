@@ -54,7 +54,7 @@ class PointService {
         return $att;
     }
 
-    public function delete($id){
+    public function deleter($id){
         $point = $this->findOne($id);
         return $point->delete();
     }

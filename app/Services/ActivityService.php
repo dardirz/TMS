@@ -11,11 +11,9 @@ class ActivityService
         return Activity::all();
     }
 
-    public function store(Request $request){
-        $request->validate([
-            'name' => 'required',
-        ]);
-        $data = $request->all();
+    public function store(){
+
+        $data = ['name'];
         $show = Activity::create($data);
         return $show;
     }
