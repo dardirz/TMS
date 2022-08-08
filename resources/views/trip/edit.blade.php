@@ -31,7 +31,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    
+
                                                     <label for="name">Name</label> <br>
                                                     <select name="user_id" id="user_id" class="c-select form-control">
                                                         <option selected>Choose...</option>
@@ -47,7 +47,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="time">EMAIL</label>
+                                                    <label for="time">Date</label>
                                                     <input type="text" id="time" class="form-control border-primary"
                                                         placeholder="time" name="time" value="{{$trip->time}}">
                                                     @if ($errors->has('time'))

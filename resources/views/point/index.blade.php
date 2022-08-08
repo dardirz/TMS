@@ -32,7 +32,7 @@
                                             <table id="users-contacts" class="table table-white-space table-bordered row-grouping display no-wrap icheck table-middle">
                                             <thead>
                                                 <tr>
-                                                    <th></th>
+                                                    <th>#</th>
                                                     <th>name</th>
                                                     <th>type</th>
                                                     <th>location</th>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Trip;
 use App\Models\User;
+use App\Services\TripService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 
 class TripController extends Controller
@@ -13,9 +15,9 @@ class TripController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(TripService $tripService)
     {
-        $trip = Trip::all();
+        $trip = $tripService->index();
         return view('trip.index',compact('trip'));
     }
 
@@ -24,9 +26,9 @@ class TripController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(UserService $userService)
     {
-        $users = User::all();
+        $users = $userService->index();
         return view('trip.create',compact('users'));
     }
 
@@ -36,14 +38,9 @@ class TripController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,TripService $tripService)
     {
-        $request->validate([
-            'time' => 'required',
-            'user_id' => 'required',
-        ]);
-        $data = $request->all();
-        $show = Trip::create($data);
+        $tripService->store($request);
         return redirect('admin/trip')->with('success', 'trip Data is successfully Created');
     }
 
@@ -64,10 +61,10 @@ class TripController extends Controller
      * @param  \App\Models\Trip  $trip
      * @return \Illuminate\Http\Response
      */
-    public function edit( $id)
+    public function edit( $id,UserService $userService,TripService $tripService)
     {
-        $users = User::all();
-        $trip = Trip::findOrFail($id);
+        $users = $userService-> index();
+        $trip = $tripService->findOne($id);
         return view('trip.edit',compact('trip','users'));
     }
 
@@ -78,14 +75,9 @@ class TripController extends Controller
      * @param  \App\Models\Trip  $trip
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request,  $id,TripService $tripService)
     {
-        $validatedData = $request->validate([
-            'time' => 'required',
-            'user_id' => 'required',
-        ]);
-        Trip::whereId($id)->update($validatedData);
-
+        $tripService->update($request, $id);
         return redirect('admin/trip')->with('success', 'Trip Data is successfully Updated ');
     }
 
@@ -95,10 +87,9 @@ class TripController extends Controller
      * @param  \App\Models\Trip  $trip
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy( $id , TripService $tripService)
     {
-        $point = Trip::findOrFail($id);
-        $point->delete();
+        $tripService->delete($id);
         return redirect('admin/trip')->with('success', 'trip Data is successfully Deleted');
     }
 }

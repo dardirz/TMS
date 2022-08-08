@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ActivityResource;
 use App\Models\Activity;
+use App\Services\ActivityService;
 use Illuminate\Http\Request;
 
 class ActivityController extends Controller
@@ -13,9 +14,9 @@ class ActivityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ActivityService $activityService)
     {
-        $activity = Activity::all();
+        $activity = $activityService->index();
 
         return view('activity.index', compact('activity'));
 
@@ -37,13 +38,10 @@ class ActivityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ActivityService $activityService,Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-        ]);
-        $data = $request->all();
-        $show = Activity::create($data);
+
+        $show = $activityService->store($request);
         return redirect('admin/activity')->with('success', 'Activity Data is successfully Created');
     }
 
@@ -64,9 +62,9 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function edit( $id)
+    public function edit(ActivityService $activityService,$id)
     {
-        $activity = Activity::findOrFail($id);
+        $activity = $activityService->findOne($id);
         return view('activity.edit', compact('activity'));
     }
 
@@ -77,13 +75,9 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request,$id,ActivityService $activityService)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-        ]);
-
-       Activity::whereId($id)->update($validatedData);
+       $update = $activityService->update($request, $id);
        return redirect('admin/activity')->with('success', 'Activity Data is successfully updated');
     }
 
@@ -93,10 +87,9 @@ class ActivityController extends Controller
      * @param  \App\Models\Activity  $activity
      * @return \Illuminate\Http\Response
      */
-    public function destroy( $id)
+    public function destroy( $id,ActivityService $activityService)
     {
-        $activity = Activity::findOrFail($id);
-        $activity->delete();
+        $deleted = $activityService->delete($id);
         return redirect('admin/activity')->with('success', 'Activity Data is successfully Deleted');
     }
 }
