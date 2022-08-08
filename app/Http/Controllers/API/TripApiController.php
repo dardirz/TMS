@@ -9,7 +9,7 @@ use App\Services\TripService;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
-class TripController extends Controller
+class TripApiController extends Controller
 {
 
     public function index(TripService $tripService)

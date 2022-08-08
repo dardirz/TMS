@@ -9,7 +9,7 @@ use App\Services\ActivityService;
 use App\Services\PointService;
 use Illuminate\Http\Request;
 
-class PointController extends Controller
+class PointApiController extends Controller
 {
 
     public function index(PointService $pointService)

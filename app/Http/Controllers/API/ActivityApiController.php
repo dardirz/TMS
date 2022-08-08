@@ -8,7 +8,7 @@ use App\Models\Activity;
 use App\Services\ActivityService;
 use Illuminate\Http\Request;
 
-class ActivityController extends Controller
+class ActivityApiController extends Controller
 {
 
     public function index(ActivityService $activityService)
