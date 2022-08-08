@@ -11,9 +11,10 @@ use App\Http\Controllers\TripController;
 | Web Routes
 |--------------------------------------------------------------------------
 */
+Route::group(['middleware' => ['auth', 'web']], function() {
+
 Route::get('dashboard', [CustomAuthController::class, 'dashboard'])->name('dashboard');
-Route::get('login', [CustomAuthController::class, 'index'])->name('login');
-Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('login.custom');
+
 Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
 Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
 Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
@@ -49,3 +50,7 @@ Route::put('/admin/trip/update/{id}',[TripController::class,'update'])->name('tr
 Route::get('/admin/trip/create',[TripController::class,'create'])->name('trip.create');
 Route::post('/admin/trip/store',[TripController::class,'store'])->name('trip.store');
 Route::delete('/admin/trip/delete/{id}',[TripController::class,'destroy'])->name('trip.delete');
+});
+
+Route::get('login', [CustomAuthController::class, 'index'])->name('login');
+Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('login.custom');
