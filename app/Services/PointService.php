@@ -30,7 +30,6 @@ class PointService {
     public function update( $data,  $id,$request){
 
         $activity_id = Activity::findOrFail($request->activity_id);
-
         $point = Point::whereId($id)->update($data);
         $point1 = Point::findOrFail($id);
         $att =$point1->activities()->sync($activity_id);

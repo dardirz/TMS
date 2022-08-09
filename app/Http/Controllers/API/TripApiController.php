@@ -28,10 +28,10 @@ class TripApiController extends Controller
 
     public function store(TripRequest $request,TripService $tripService)
     {
-        $tripService = new Trip();
+        $trip = new Trip();
         $data = $request->validated();
-        $tripService->store($data);
-        return new TripResource($tripService);
+        $trip = $tripService->store($data);
+        return new TripResource($trip);
     }
 
 
@@ -50,15 +50,18 @@ class TripApiController extends Controller
 
     public function update(TripRequest $request,  $id,TripService $tripService)
     {
+        $update = new Trip();
         $data = $request->validated();
-        $tripService->update( $data, $id);
-       return new TripResource($tripService);
+        $update = $tripService->update( $data, $id);
+        $dd = $tripService->findOne($id);
+       return new TripResource( $dd);
     }
 
 
     public function destroy( $id , TripService $tripService)
     {
+        $dd = $tripService->findOne($id);
         $tripService->delete($id);
-        return new TripResource($tripService);
+        return new TripResource($dd);
     }
 }

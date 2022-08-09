@@ -28,10 +28,10 @@ class PointApiController extends Controller
 
     public function store(PointRequest $request,PointService $pointService)
     {
-        $pointService = new Point();
+        $point = new Point();
         $data = $request->validated();
-        $pointService->store($data,$request);
-        return new PointResource($pointService);
+        $point=$pointService->store($data,$request);
+        return new PointResource($point);
     }
 
 
@@ -50,16 +50,18 @@ class PointApiController extends Controller
 
     public function update(PointRequest $request,  $id,PointService $pointService)
     {
+        $update = new Point();
         $data = $request->validated();
         $update = $pointService->update($data, $id,$request);
-        return new PointResource($update);
+        $dd =$pointService->findOne($id);
+        return new PointResource($dd);
     }
 
 
     public function destroy( $id,PointService $pointService)
     {
-
+        $dd =$pointService->findOne($id);
         $deleted = $pointService->delete($id);
-        return new PointService($deleted);
+        return new PointResource($dd);
     }
 }

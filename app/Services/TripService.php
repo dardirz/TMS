@@ -21,7 +21,7 @@ class TripService {
 
     public function update($data,  $id){
 
-        Trip::whereId($id)->update($data);
+       return Trip::whereId($id)->update($data);
 
     }
 

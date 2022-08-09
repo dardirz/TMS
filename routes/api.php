@@ -60,6 +60,6 @@ Route::get('/trip/{id}', [TripApiController::class,'show'] );
 Route::post('/trip', [TripApiController::class,'store'] );
 Route::put('/trip/{id}', [TripApiController::class,'update'] );
 Route::delete('/trip/{id}', [TripApiController::class,'destroy'] );
-////////////////////////////////////////////////////
+
 
 

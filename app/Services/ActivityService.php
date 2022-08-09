@@ -23,7 +23,6 @@ class ActivityService
 
     public function update( $data , $id){
 
-
       return Activity::whereId($id)->update($data);
     }
 
