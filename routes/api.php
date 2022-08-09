@@ -1,8 +1,14 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\API\ActivityApiController;
+use App\Http\Controllers\API\PointApiController;
+use App\Http\Controllers\API\TripApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Resources\ActivityResource;
+use App\Models\Activity;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +35,31 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
 });
+
+////////////////////   activity  \\\\\\\\\\\\\\\\
+
+Route::get('/activity', [ActivityApiController::class,'index'] );
+Route::get('/activity/{id}', [ActivityApiController::class,'show'] );
+Route::post('/activity', [ActivityApiController::class,'store'] );
+Route::put('/activity/{id}', [ActivityApiController::class,'update'] );
+Route::delete('/activity/{id}', [ActivityApiController::class,'destroy'] );
+
+/////////////////////////////////////////////////
+
+/////////////////////    point     \\\\\\\\\\\\\\\\
+Route::get('/point', [PointApiController::class,'index'] );
+Route::get('/point/{id}', [PointApiController::class,'show'] );
+Route::post('/point', [PointApiController::class,'store'] );
+Route::put('/point/{id}', [PointApiController::class,'update'] );
+Route::delete('/point/{id}', [PointApiController::class,'destroy'] );
+////////////////////////////////////////////////////
+
+/////////////////////    trip     \\\\\\\\\\\\\\\\
+Route::get('/trip', [TripApiController::class,'index'] );
+Route::get('/trip/{id}', [TripApiController::class,'show'] );
+Route::post('/trip', [TripApiController::class,'store'] );
+Route::put('/trip/{id}', [TripApiController::class,'update'] );
+Route::delete('/trip/{id}', [TripApiController::class,'destroy'] );
+
+
+

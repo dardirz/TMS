@@ -6,7 +6,7 @@
                 <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
                 <li class="nav-item mr-auto">
                     <a class="navbar-brand" href="{{route('home')}}">
-                        <img class="brand-logo" alt="modern admin logo" src="../../../dashboard/app-assets/images/logo/logo.png">
+                        <img class="brand-logo" alt="modern admin logo" src="../../../dashboard/app-assets/images/logo/iSupply logo-1 - 1024.png">
                         <h3 class="brand-text">Isupply </h3>
                     </a>
                 </li>
@@ -144,7 +144,7 @@
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <span class="mr-1">Hello,
-              <span class="user-name text-bold-700">{{Auth::user()->name}}</span>
+              <span class="user-name text-bold-700">{{Auth::user()->type}}</span>
                             </span>
                             <span class="avatar avatar-online">
               <img src="../../../dashboard/app-assets/images/portrait/small/avatar-s-19.png" alt="avatar"><i></i></span>

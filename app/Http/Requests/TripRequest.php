@@ -1,0 +1,17 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class TripRequest extends FormRequest
+{
+
+    public function rules()
+    {
+        return [
+            'time' => 'required',
+            'user_id' => 'required',
+        ];
+    }
+}
