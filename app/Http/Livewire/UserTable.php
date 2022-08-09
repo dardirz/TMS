@@ -12,6 +12,6 @@ class UserTable extends Component
     public function render()
     {
 
-        return view('livewire.user-table',['users'=>User::paginate(2)]);
+        return view('livewire.user-table',['users'=>User::paginate(10)]);
     }
 }
