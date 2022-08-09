@@ -49,7 +49,7 @@ class ActivityApiController extends Controller
 
     public function update(ActivityRequest $request,$id,ActivityService $activityService)
     {
-       $update = new Activity();
+        $update = new Activity();
        $validated = $request->validated();
        $update = $activityService->update($validated, $id);
        $dd = $activityService->findOne($id);
