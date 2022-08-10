@@ -1,9 +1,14 @@
 <?php
 namespace App\Http\Controllers;
+
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegistrationRequest;
 use Illuminate\Http\Request;
 use Hash;
 use Session;
 use App\Models\User;
+use App\Services\LoginService;
+use App\Services\RegistrationService;
 use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
@@ -12,19 +17,9 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function customLogin(Request $request)
+    public function customLogin(LoginRequest $request,LoginService $login)
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('/')
-                        ->withSuccess('Signed in');
-        }
-
+        $login->login($request);
         return redirect("login")->withSuccess('Login details are not valid');
     }
 
@@ -35,47 +30,18 @@ class AuthController extends Controller
 
     }
 
-    public function customRegistration(Request $request)
+    public function customRegistration(RegistrationRequest $request,RegistrationService $register)
     {
-        $request->validate([
-            'phone' => 'required',
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            
-        ]);
-
-        $data = $request->all();
-        $check = $this->create($data);
-
+        $register->create($request);
         return redirect("/")->withSuccess('You have signed-in');
     }
-
-    public function create(array $data)
-    {
-      return User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'phone' => $data['phone'],
-        'password' => Hash::make($data['password']),
-        
-      ]);
-    }
-
     public function dashboard()
     {
-
             return view('dashboard');
-
-
-       
     }
 
     public function home(){
-
-            return view('home');
-        
-        
+        return view('home');
     }
 
     public function signOut() {
@@ -85,43 +51,7 @@ class AuthController extends Controller
         return Redirect('login');
     }
 
-    public function showUsers(){
-        $user = User::all();
-        return view('admin.user.users',['user'=>$user]);
-    }
 
-    public function edit($id){
-        $user = User::findOrFail($id);
-        return view('admin.user.edit',['user'=>$user]);
-    }
-
-    public function update(Request $request,$id){
-
-        $validator=$request->validate([
-            'phone' => 'required',
-            'name' => 'required',
-            'email' => 'required|email',
-        ]);
-
-        if($validator){
-
-            $user = User::findOrFail($id);
-            $user->update($request->all());
-            return redirect(route('user-show'))->with('sucess','updated');
-        }else{
-            return back()->with('fail','some error');
-        }
-
-
-    }
-
-    public function destroy( $id)
-    {
-        //
-        $user = User::findOrFail($id);
-        $user->delete();
-        return redirect(route('user-show'))->with('sucess', 'User is Deleted Successful!');
-    }
 
 
 

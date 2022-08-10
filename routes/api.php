@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PointApiController;
 use App\Http\Controllers\TripApiController;
+use App\Http\Controllers\UserApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,10 @@ Route::group([
     Route::post('/logout', [AuthApiController::class, 'logout']);
     Route::post('/refresh', [AuthApiController::class, 'refresh']);
     Route::get('/user-profile', [AuthApiController::class, 'userProfile']);
+    //users
+    Route::get('/users', [UserApiController::class, 'index']);
+    Route::put('/update/user/{id}', [UserApiController::class, 'update']);
+    Route::delete('/delete/user/{id}', [UserApiController::class, 'delete']);
     //trips
     Route::get('/trips', [TripApiController::class, 'index']);
     Route::post('/create/trip', [TripApiController::class, 'create']);

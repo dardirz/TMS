@@ -66,6 +66,15 @@
                                                 @endif
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="password">CONFIRM PASSWORD</label>
+                                                <input type="text" id="password" class="form-control border-primary" placeholder="confirm password" name="password_confirmation">
+                                                @if ($errors->has('password_confirmation'))
+                                                <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </div>
                         
                                     <button type="button" class="btn btn-warning mr-1">

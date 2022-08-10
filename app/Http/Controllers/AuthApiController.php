@@ -1,8 +1,14 @@
 <?php
 namespace App\Http\Controllers;
+
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegistrationRequest;
+use App\Http\Resources\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Services\RegistrationService;
+use Illuminate\Support\Facades\Hash;
 use Validator;
 
 class AuthApiController extends Controller
@@ -16,21 +22,16 @@ class AuthApiController extends Controller
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
         auth()->setDefaultDriver('api');
     }
+
     /**
      * Get a JWT via given credentials.
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function login(Request $request){
-    	$validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-            'password' => 'required|string|min:6',
-        ]);
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
-        }
-        if (! $token = auth()->attempt($validator->validated())) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+  
+    public function login(LoginRequest $request){
+        if (! $token = auth()->attempt($request->only('email','password'))) {
+            return response()->json(['error' =>'invalied credentials'], 401);
         }
         return $this->createNewToken($token);
     }
@@ -39,20 +40,9 @@ class AuthApiController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function register(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|between:2,100',
-            'email' => 'required|string|email|max:100|unique:users',
-            'password' => 'required|string|confirmed|min:6',
-            'phone' => 'required',
-        ]);
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
-        }
-        $user = User::create(array_merge(
-                    $validator->validated(),
-                    ['password' => bcrypt($request->password)]
-                ));
+    public function register(RegistrationRequest $request,RegistrationService $register) {
+
+        $user = $register->create($request);
         return response()->json([
             'message' => 'User successfully registered',
             'user' => $user
@@ -99,4 +89,5 @@ class AuthApiController extends Controller
             'user' => auth()->user()
         ]);
     }
+
 }
