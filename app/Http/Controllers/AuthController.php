@@ -42,7 +42,7 @@ class AuthController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'type'=>'required'
+            
         ]);
 
         $data = $request->all();
@@ -58,7 +58,7 @@ class AuthController extends Controller
         'email' => $data['email'],
         'phone' => $data['phone'],
         'password' => Hash::make($data['password']),
-        'type'=>$data['type']
+        
       ]);
     }
 

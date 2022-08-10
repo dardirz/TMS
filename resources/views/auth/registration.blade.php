@@ -67,15 +67,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row justify-content-end">
-                                        <select class="custom-select w-50 ml-5" name="type" id="inputGroupSelect01">
-
-                                            <option value="driver">driver</option>
-                                        </select>
-                                        @if ($errors->has('type'))
-                                        <span class="text-danger">{{ $errors->first('type') }}</span>
-                                        @endif
-                                    </div>
+                        
                                     <button type="button" class="btn btn-warning mr-1">
                                         <i class="ft-x"></i> Cancel
                                     </button>

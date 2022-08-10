@@ -14,7 +14,7 @@ class AddUserType extends Migration
     public function up()
     {
         schema::table('users',function (Blueprint $table){
-            $table->string('type')->nullable();
+            $table->enum('type', ['admin', 'user'])->default('user');
         });
     }
 
