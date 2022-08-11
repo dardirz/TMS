@@ -28,8 +28,8 @@ class PointsRequest extends FormRequest
             'type'=>'required',
             'location'=>'required|string',
             'address'=>'required|string',
-            'long'=>'required|integer',
-            'lat'=>'required|integer'
+            'long'=>'required|numeric',
+            'lat'=>'required|numeric'
             
         ];
     }

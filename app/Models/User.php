@@ -23,6 +23,7 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'phone',
+        'balance',
         'type',
     ];
 
@@ -59,4 +60,5 @@ class User extends Authenticatable implements JWTSubject
     public function trips(){
         return $this->hasMany(Trip::class);
     }
+ 
 }

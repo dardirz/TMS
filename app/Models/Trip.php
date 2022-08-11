@@ -12,7 +12,7 @@ class Trip extends Model
    
     protected $fillable = [
         'begin',
-        'assigned_to',
+        'user_id',
     ];
     public $timestamps = false;
     protected $dateFormat = 'U';

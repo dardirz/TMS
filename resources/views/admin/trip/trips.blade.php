@@ -46,7 +46,7 @@
                                                             <input type="checkbox" class="input-chk mr-2">
                                                              {{$trip->id}}
                                                         </td>
-                                                        <td>{{$users->find($trip->assigned_to)->name}}</td>
+                                                        <td>{{$trip->user->name}}</td>
                                                         <td class="text-center">{{ $trip->begin }}</td>
                                                         
                                                         <td>

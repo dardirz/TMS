@@ -8,7 +8,7 @@ use App\Models\Trip;
     public function createTrip($trip){
           
           $trip = Trip::create([
-            'assigned_to'=>$trip->assigned_to,
+            'user_id'=>$trip->user_id,
             'begin'=>$trip->begin
           ]);
           return $trip;
@@ -16,7 +16,7 @@ use App\Models\Trip;
     public function updateTrip($request,$id){
       $trip = Trip::findOrFail($id);
       $trip->update([
-        'assigned_to'=>$request->assigned_to,
+        'user_id'=>$request->user_id,
         'begin'=>$request->begin
     ]);
     return $trip;

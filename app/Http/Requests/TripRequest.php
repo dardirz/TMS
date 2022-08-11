@@ -24,7 +24,7 @@ class TripRequest extends FormRequest
     public function rules()
     {
         return [
-            'assigned_to'=>'required',
+            'user_id'=>'required',
             'begin'=>'required'
         ];
     }

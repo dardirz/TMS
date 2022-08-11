@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\Balance;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class RegistrationService {
@@ -19,7 +21,13 @@ class RegistrationService {
     }
     public function update($request,$id){
         $user = User::findOrFail($id);
-        $user->update($request->all());
+        $data = $request->all();
+        $user->update([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'balance'=>$data['balance'],
+        ]);
         return $user;
     }
     public function delete($id){

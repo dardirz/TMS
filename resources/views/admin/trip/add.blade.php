@@ -31,13 +31,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="name">driver</label>
-                                                <select class="custom-select w-50 ml-5" name="assigned_to" id="inputGroupSelect01">
+                                                <select class="custom-select w-50 ml-5" name="user_id" id="inputGroupSelect01">
                                                     @foreach($users as $user)
                                                     <option value="{{$user->id}}">{{$user->name}}</option>
                                                     @endforeach
                                                 </select>
-                                                @if ($errors->has('driver'))
-                                                <span class="text-danger">{{ $errors->first('driver') }}</span>
+                                                @if ($errors->has('user_id'))
+                                                <span class="text-danger">{{ $errors->first('user_id') }}</span>
                                                 @endif
                                             </div>
                                         </div>

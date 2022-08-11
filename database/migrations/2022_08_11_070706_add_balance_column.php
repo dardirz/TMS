@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUserType extends Migration
+class AddBalanceColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddUserType extends Migration
      */
     public function up()
     {
-        schema::table('users',function (Blueprint $table){
-            $table->enum('type', ['admin', 'user'])->default('user');
+        Schema::table('users',function($table){
+            $table->decimal('balance',9,3)->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddUserType extends Migration
      */
     public function down()
     {
-        schema::table('users',function (Blueprint $table){
-            $table->dropColumn('type');
+        Schema::table('users',function($table){
+            $table->dropColumn('balance');
         });
     }
 }

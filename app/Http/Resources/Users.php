@@ -18,6 +18,8 @@ class Users extends JsonResource
         return [
             'name' => $this->name,
             'email'=> $this->email,
-        ];
+            'type'=>$this->type,
+            'balance'=>$this->balance
+       ];
     }
 }

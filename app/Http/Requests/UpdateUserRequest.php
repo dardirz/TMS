@@ -28,7 +28,8 @@ class UpdateUserRequest extends FormRequest
             'email' => 'required|string|email|max:100',
             'password' => 'required|string|confirmed|min:6',
             'phone' => 'required',
-            'password_confirmation'=>'required'
+            'password_confirmation'=>'required',
+            'balance'=>'required'
         ];
     }
 }

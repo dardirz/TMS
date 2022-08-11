@@ -30,7 +30,8 @@ class TripController extends Controller
     public function edit($id)
     {
         $trip = Trip::findOrFail($id);
-        return view('admin.trip.edit', ['trip' => $trip]);
+        $users = User::all();
+        return view('admin.trip.edit', ['trip' => $trip,'users'=>$users]);
     }
     public function update(TripRequest $request, TripService $trip, $id)
     {

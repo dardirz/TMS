@@ -14,6 +14,9 @@ class Trips extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+         return [
+            'begin'=>$this->begin,
+            'driver'=>$this->user
+        ];
     }
 }
